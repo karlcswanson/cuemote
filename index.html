@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OBT Remote</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="apple-touch-startup-image" href="img/startup.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch-icon-iphone-retina-precomposed.png" />
+    
+    <script type="text/javascript" src="js/cueserver.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    
+    <script>
+/*         update time box */
+        function update(d){
+        var clock=new Date();
+        var hours=clock.getHours();
+        var minutes=clock.getMinutes();
+        var seconds=clock.getSeconds();
+        var mill = clock.getMilliseconds();
+
+        if (hours < 10){
+            hours="0" + hours;
+        }   
+        if (minutes < 10){
+            minutes="0" + minutes;
+        }
+        if (seconds < 10){
+            seconds="0" + seconds;
+        }
+        $("#time").html(hours + ":" + minutes + ":" + seconds)
+        }
+
+        $(document).ready(function() {
+            var id1 = window.setInterval(update, 70);
+        });
+    </script>
+
+    <script type="text/javascript">
+    /*     set IP address of CueServer */
+    var gIPAddress = '192.168.232.30';
+    document.onkeyup = checkKey;
+
+    function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '49') {
+        console.log("Preset 1");
+        SendCueScript(gIPAddress, 'Cue 2 Fade 3 go');
+    }
+    else if (e.keyCode == '50') {
+        console.log("Preset 2");
+        SendCueScript(gIPAddress, 'Cue 3 Fade 3 go');
+    }
+    else if (e.keyCode == '51') {
+        console.log("Preset 3");
+        SendCueScript(gIPAddress, 'Cue 4 Fade 3 go');
+    }
+    else if (e.keyCode == '52') {
+        console.log("Preset 4");
+        SendCueScript(gIPAddress, 'Cue 5 Fade 3 go');
+    }
+    else if (e.keyCode == '53') {
+        console.log("Preset 5");
+        SendCueScript(gIPAddress, 'Cue 6 Fade 3 go');
+    }
+    else if (e.keyCode == '54' || e.keyCode == '86') {
+        console.log("Preset 6");
+        SendCueScript(gIPAddress, 'Cue 7 Fade 3 go');
+    }
+    else if (e.keyCode == '57') {
+        console.log("On");
+        SendCueScript(gIPAddress, 'Cue 1 Fade 3 go');
+    }
+    else if (e.keyCode == '48') {
+        console.log("Off");
+        SendCueScript(gIPAddress, 'Cue 8 Fade 3 go');
+    }
+    else if (e.keyCode == '66') {
+        console.log("Blackout");
+        SendCueScript(gIPAddress, 'Cue 8 Fade 0 go');
+    }
+    }
+    </script>
+    
+    <style type="text/css">
+    body {
+        padding-bottom: 40px;
+        background-color: #8c8c8c;
+    }
+    
+    .btn-group {
+        padding: 7px 9px;
+    }
+    
+    .container { 
+        max-width: 350px;
+    }
+
+    .row {
+        padding: 5px;
+    }
+    
+    .btn {
+        height: 60px;
+        font-weight: bold;
+        font-size: xx-large;
+    }
+    
+    #time {
+        font-size:  xx-large;
+        font-weight: bold;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    
+    <div class="page-header">
+    <h1>OBT</h1>
+    <i>Systems Automation</i>
+    </div>
+
+    <div class="panel panel-primary clock">
+    <div class="panel-heading">Clock</div>
+    <div class="text-center" id="time">12:34:56</div>
+    </div>
+
+    <div class="panel panel-primary">
+    <div class="panel-heading">Lighting</div>
+    
+    <div class="row">
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 1 Fade 3 go')">On</a></div>
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 5 Fade 3 go')">4</a></div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 2 Fade 3 go')">1</a></div>
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 6 Fade 3 go')">5</a></div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 3 Fade 3 go')">2</a></div>
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 7 Fade 3 go')">6</a></div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 4 Fade 3 go')">3</a></div>
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block" href="javascript:SendCueScript(gIPAddress, 'Cue 8 Fade 3 go')">Off</a></div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block btn-danger" href="javascript:SendCueScript(gIPAddress, 'Button * disable; Button * At #205')">Disable</a></div>
+    <div class="col-md-6 col-xs-6"><a class="btn btn-default btn-block btn-success" href="javascript:SendCueScript(gIPAddress, 'Button * enable; Button * at 0')">Enable</a></div>
+    </div>
+
+    </div>
+    
+    </div>
+</body>
+</html> 
